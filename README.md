@@ -1,4 +1,4 @@
-# Setting Option for Laravel
+# Setting option for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/amdad121/setting-laravel.svg?style=flat-square)](https://packagist.org/packages/amdad121/setting-laravel)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/amdad121/setting-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/amdad121/setting-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
