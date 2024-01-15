@@ -37,7 +37,7 @@
             "AmdadulHaq\\Setting\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/Helpers.php"
         ]
     },
     "autoload-dev": {
