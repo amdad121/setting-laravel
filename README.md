@@ -1,9 +1,9 @@
 # Setting option for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/amdad121/setting-laravel.svg?style=flat-square)](https://packagist.org/packages/amdad121/setting-laravel)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/amdadulhaq/setting-laravel.svg?style=flat-square)](https://packagist.org/packages/amdadulhaq/setting-laravel)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/amdad121/setting-laravel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/amdad121/setting-laravel/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/amdad121/setting-laravel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/amdad121/setting-laravel/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/amdad121/setting-laravel.svg?style=flat-square)](https://packagist.org/packages/amdad121/setting-laravel)
+[![Total Downloads](https://img.shields.io/packagist/dt/amdadulhaq/setting-laravel.svg?style=flat-square)](https://packagist.org/packages/amdadulhaq/setting-laravel)
 
 This is a minimal setting option package for Laravel. You can easily use on your project.
 
@@ -12,7 +12,7 @@ This is a minimal setting option package for Laravel. You can easily use on your
 You can install the package via composer:
 
 ```bash
-composer require amdad121/setting-laravel
+composer require amdadulhaq/setting-laravel
 ```
 
 You can publish and run the migrations with:
