@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $key
- * @property string $value
+ * @property string $key
+ * @property string|null $value
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  *
- * @method static where(string $string, $key)
- * @method static updateOrCreate(array $array, array $array1)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting where(string $column, mixed $value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting updateOrCreate(array $attributes, array $values = [])
  */
 class Setting extends Model
 {
