@@ -28,7 +28,7 @@ composer require amdadulhaq/setting-laravel
 ### Requirements
 
 - PHP 8.2, 8.3, 8.4, or 8.5
-- Laravel 10, 11, or 12
+- Laravel 10, 11, 12, or 13
 
 You can publish and run the migrations with:
 
