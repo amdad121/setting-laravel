@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Facade;
  * @method static \AmdadulHaq\Setting\Models\Setting set(string $key, mixed $value)
  * @method static bool remove(string $key)
  * @method static bool has(string $key)
- * @method static \Illuminate\Support\Collection all()
- * @method static void setMultiple(array $settings)
- * @method static array getMultiple(array $keys, mixed $default = null)
+ * @method static \Illuminate\Support\Collection<string, mixed> all()
+ * @method static void setMultiple(array<string, mixed> $settings)
+ * @method static array<string, mixed> getMultiple(array<int, string> $keys, mixed $default = null)
  * @method static void flushCache()
+ * @method static void overwriteConfig(array<int, string>|null $keys = null)
  *
  * @see \AmdadulHaq\Setting\Setting
  */

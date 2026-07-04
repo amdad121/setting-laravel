@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AmdadulHaq\Setting;
 
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class SettingServiceProvider extends ServiceProvider
@@ -33,5 +34,11 @@ class SettingServiceProvider extends ServiceProvider
 
             return Cache::forget($cacheKey);
         });
+
+        if (config('setting.overwrite_config', false) && Schema::hasTable('settings')) {
+            $keys = config('setting.overwrite_config_keys', []);
+
+            $this->app->make(Setting::class)->overwriteConfig($keys === [] ? null : $keys);
+        }
     }
 }

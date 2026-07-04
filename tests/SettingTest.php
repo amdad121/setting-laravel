@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use AmdadulHaq\Setting\Facades\Setting as SettingFacade;
 use AmdadulHaq\Setting\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 
 use function Pest\Laravel\assertDatabaseHas;
 
@@ -207,4 +208,115 @@ it('handles empty string values', function (): void {
     setting()->set('empty_field', '');
 
     expect(setting()->get('empty_field'))->toBe('');
+});
+
+it('overwrites app config with stored settings', function (): void {
+    config(['app.name' => 'Original']);
+
+    setting()->set('app.name', 'Overwritten');
+    setting()->overwriteConfig();
+
+    expect(config('app.name'))->toBe('Overwritten');
+});
+
+it('overwrites only the given keys when restricted', function (): void {
+    config(['app.name' => 'Original', 'app.env' => 'production']);
+
+    setting()->set('app.name', 'Overwritten');
+    setting()->set('app.env', 'staging');
+
+    setting()->overwriteConfig(['app.name']);
+
+    expect(config('app.name'))->toBe('Overwritten');
+    expect(config('app.env'))->toBe('production');
+});
+
+it('overwrites nothing when no settings are stored', function (): void {
+    config(['app.name' => 'Original']);
+
+    setting()->overwriteConfig();
+
+    expect(config('app.name'))->toBe('Original');
+});
+
+it('flushes cache via the Cache macro', function (): void {
+    config(['setting.cache_enabled' => true]);
+
+    setting()->set('app_name', 'Laravel');
+    setting()->get('app_name');
+
+    setting()->set('app_name', 'Updated');
+    Cache::flushSettings();
+
+    expect(setting()->get('app_name'))->toBe('Updated');
+});
+
+it('can check if a setting exists when cache is disabled', function (): void {
+    config(['setting.cache_enabled' => false]);
+
+    setting()->set('app_name', 'Laravel');
+
+    expect(setting()->has('app_name'))->toBeTrue();
+    expect(setting()->has('nonexistent'))->toBeFalse();
+});
+
+it('can get all settings when cache is disabled', function (): void {
+    config(['setting.cache_enabled' => false]);
+
+    setting()->set('app_name', 'Laravel');
+    setting()->set('max_users', 100);
+
+    $all = setting()->all();
+
+    expect($all)->toHaveCount(2);
+    expect($all->get('app_name'))->toBe('Laravel');
+});
+
+it('can get multiple settings when cache is disabled', function (): void {
+    config(['setting.cache_enabled' => false]);
+
+    setting()->set('app_name', 'Laravel');
+    setting()->set('max_users', 100);
+
+    $settings = setting()->getMultiple(['app_name', 'max_users', 'nonexistent'], 'default');
+
+    expect($settings)->toBe([
+        'app_name' => 'Laravel',
+        'max_users' => 100,
+        'nonexistent' => 'default',
+    ]);
+});
+
+it('does not flush cache when setMultiple is used and cache is disabled', function (): void {
+    config(['setting.cache_enabled' => false]);
+
+    setting()->setMultiple(['app_name' => 'Laravel']);
+
+    expect(setting()->get('app_name'))->toBe('Laravel');
+});
+
+it('returns false when removing a nonexistent key', function (): void {
+    expect(setting()->remove('nonexistent'))->toBeFalse();
+});
+
+it('can set an object value', function (): void {
+    $object = (object) ['foo' => 'bar'];
+
+    setting()->set('object_setting', $object);
+
+    expect(setting()->get('object_setting'))->toBe(['foo' => 'bar']);
+});
+
+it('does not throw when a stored value is a raw database null', function (): void {
+    Setting::query()->create(['key' => 'raw_null', 'value' => null]);
+
+    config(['setting.cache_enabled' => false]);
+
+    expect(setting()->get('raw_null'))->toBeNull();
+});
+
+it('casts a leading-zero numeric string as an integer', function (): void {
+    setting()->set('code', '0123');
+
+    expect(setting()->get('code'))->toBe(123);
 });

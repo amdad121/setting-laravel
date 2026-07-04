@@ -3,7 +3,7 @@ includes:
     - vendor/nesbot/carbon/extension.neon
 
 parameters:
-    level: 4
+    level: 8
     paths:
         - src
     tmpDir: build/phpstan
