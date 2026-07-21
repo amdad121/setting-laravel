@@ -2,6 +2,11 @@
 
 All notable changes to `setting-laravel` will be documented in this file.
 
+## v3.0.0 - 2026-07-21
+
+### Removed
+- Dropped Laravel 10 support (minimum is now Laravel 11)
+
 ## v2.0.0 - 2025-01-01
 
 ### Breaking Changes
